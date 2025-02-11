@@ -7754,3 +7754,61 @@ INFO 2025-02-11 11:02:40,143 basehttp "POST /components/component_update/3/ HTTP
 INFO 2025-02-11 11:02:40,167 basehttp "GET /components/ HTTP/1.1" 200 23518
 INFO 2025-02-11 11:03:36,529 autoreload D:\Onlime Sync\3_Programering\Itucation\VS Code\BikeConstructionDjango\BikeConstructionDjango\BikeConstructionDjango\settings.py changed, reloading.
 INFO 2025-02-11 11:03:37,192 autoreload Watching for file changes with StatReloader
+INFO 2025-02-11 15:26:28,720 autoreload Watching for file changes with StatReloader
+INFO 2025-02-11 15:26:34,573 basehttp "GET / HTTP/1.1" 200 2608
+WARNING 2025-02-11 15:26:34,819 log Not Found: /favicon.ico
+WARNING 2025-02-11 15:26:34,819 basehttp "GET /favicon.ico HTTP/1.1" 404 5142
+INFO 2025-02-11 15:26:38,919 basehttp "GET /components/ HTTP/1.1" 200 23518
+INFO 2025-02-11 15:26:40,028 basehttp "GET /bikes/ HTTP/1.1" 200 11042
+INFO 2025-02-11 15:26:40,825 basehttp "GET / HTTP/1.1" 200 2608
+INFO 2025-02-11 15:26:42,586 basehttp "GET /bikes/ HTTP/1.1" 200 11042
+INFO 2025-02-11 15:26:44,026 basehttp "GET /components/ HTTP/1.1" 200 23518
+INFO 2025-02-11 15:30:11,223 autoreload D:\Onlime Sync\3_Programering\Itucation\VS Code\BikeConstructionDjango\BikeConstruction\BikeConstructionDjango\settings.py changed, reloading.
+INFO 2025-02-11 15:34:16,580 autoreload Watching for file changes with StatReloader
+INFO 2025-02-11 15:34:26,540 autoreload D:\Onlime Sync\3_Programering\Itucation\VS Code\BikeConstructionDjango\BikeConstruction\BikeConstructionDjango\settings.py changed, reloading.
+INFO 2025-02-11 15:36:40,097 autoreload Watching for file changes with StatReloader
+ERROR 2025-02-11 15:36:45,891 exception Invalid HTTP_HOST header: '127.0.0.1:8080'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Anders\.virtualenvs\BikeConstruction-IuXEQ1M0\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anders\.virtualenvs\BikeConstruction-IuXEQ1M0\Lib\site-packages\django\utils\deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anders\.virtualenvs\BikeConstruction-IuXEQ1M0\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anders\.virtualenvs\BikeConstruction-IuXEQ1M0\Lib\site-packages\django\http\request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8080'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-02-11 15:36:45,898 log Bad Request: /
+WARNING 2025-02-11 15:36:45,901 basehttp "GET / HTTP/1.1" 400 143
+INFO 2025-02-11 15:37:08,879 autoreload Watching for file changes with StatReloader
+ERROR 2025-02-11 15:37:11,799 exception Invalid HTTP_HOST header: '127.0.0.1:8080'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Anders\.virtualenvs\BikeConstruction-IuXEQ1M0\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anders\.virtualenvs\BikeConstruction-IuXEQ1M0\Lib\site-packages\django\utils\deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anders\.virtualenvs\BikeConstruction-IuXEQ1M0\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anders\.virtualenvs\BikeConstruction-IuXEQ1M0\Lib\site-packages\django\http\request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8080'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-02-11 15:37:11,809 log Bad Request: /
+WARNING 2025-02-11 15:37:11,811 basehttp "GET / HTTP/1.1" 400 143
+INFO 2025-02-11 15:38:03,853 autoreload D:\Onlime Sync\3_Programering\Itucation\VS Code\BikeConstructionDjango\BikeConstruction\BikeConstructionDjango\settings.py changed, reloading.
+INFO 2025-02-11 15:38:23,518 autoreload Watching for file changes with StatReloader
+INFO 2025-02-11 15:38:27,900 basehttp "GET / HTTP/1.1" 200 2608
+INFO 2025-02-11 15:38:28,022 basehttp "GET /static/css/BG.svg HTTP/1.1" 304 0
+INFO 2025-02-11 15:38:30,423 basehttp "GET /bikes/ HTTP/1.1" 200 11042
+INFO 2025-02-11 15:38:31,498 basehttp "GET /components/ HTTP/1.1" 200 23518
+INFO 2025-02-11 15:38:34,204 basehttp "GET / HTTP/1.1" 200 2608
+INFO 2025-02-11 15:38:35,290 basehttp "GET /bikes/ HTTP/1.1" 200 11042
+INFO 2025-02-11 15:38:36,851 basehttp "GET / HTTP/1.1" 200 2608
+INFO 2025-02-11 15:38:37,840 basehttp "GET /components/components/ HTTP/1.1" 200 23518
+INFO 2025-02-11 15:38:39,640 basehttp "GET /bikes/ HTTP/1.1" 200 11042
+INFO 2025-02-11 15:38:41,489 basehttp "GET /components/ HTTP/1.1" 200 23518
