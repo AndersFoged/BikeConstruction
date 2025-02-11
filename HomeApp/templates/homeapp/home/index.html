@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}  {# This line is necessary to use {% static %} #}
+{% block content %}
+<h2>Konfigurer din cykel!</h2>
+<div style="display: flex; justify-content: center; align-items: center; gap: 50px;">
+    <a href="{% url 'bikes' %}">
+        <img src="{% static 'images/bike_1.png' %}" alt="Bike Image" style="width: 1000px; height: auto; margin-left: 100px;">
+    </a>
+
+    <a href="{% url 'components' %}">
+        <img src="{% static 'images/pedal_1.png' %}" alt="Pedal Image" style="width: 800px; height: auto; margin-right: 50px;">
+    </a>
+
+</div>
+    {% comment %}
+    {% endcomment %}
+{% endblock %}

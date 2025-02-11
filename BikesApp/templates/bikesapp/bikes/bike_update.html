@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <title>Side-by-Side Pages</title>
+    <style>
+        body {
+            {# background-image: url('BG.svg'); #}
+            margin: 0;
+            height: 100vh; /* Full viewport height */
+            display: flex; /* Arrange children side by side */
+        }
+        form {
+            display: flex; /* Keep sections side by side */
+            width: 100%; /* Ensure form spans the entire width */
+            margin: 0;
+        }
+        .page {
+            flex: 1; /* Equal width for both pages */
+            overflow-y: auto; /* Enable independent vertical scrolling */
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .page1 {
+            /*background-color: #006b96;*/
+            {# background-image: url('{{ url_for('static', filename='BG.svg') }}'); #}
+        }        
+        .page2 {
+            /*background-color: #e0f7fa;*/
+            {# background-image: url('{{ url_for('static', filename='BG.svg') }}'); #}
+        }   
+        h1, h2 {
+            font-size: 24px;
+            margin: 0 0 20px;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .submit-button {
+            margin: 10px 0;
+        }
+        .centered-text h3 {
+            text-align: center;
+        }
+        .hr, .hr-dashed {
+            border: 0;
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        .hr-dashed {
+            border-top: 1px dashed #ccc;
+        }
+    </style>
+</head>
+<body>
+    <form action="#" method="POST">
+        {% csrf_token %}
+        <!-- First page (left) -->
+        <div class="page page1">
+            <div class="container">
+                <!--<p>ID</p>
+                <p><input type="number" name="bikeID" value="{{bike.bikeID}}" readonly></p> -->
+                <h1>Konfigurer Cykel</h1>
+                <input type="text" name="name" placeholder="Navn på cykel" size="21" value='{{ bike.name }}' required>
+                <br>
+                <div>
+                    <label for="types">Choose a type:</label>
+                    <select name="type" id="types">
+                        {% for p in bike_types %}
+                        <option value="{{ p.id }}" {% if p.id == bike.typeId %}selected{% endif %}>{{ p.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="description">Description:</label>
+                    <textarea id="description" class="textbox-input" name="description" required>{{ bike.description }}</textarea>
+                </div>
+                <div>
+                    <input type="submit" value="Gem cykel" class="b">
+                    <a href="{% url 'bike_by_id' bike.id %}" class="b">Fortryd</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second page (right) -->
+        <div class="page page2">
+            <h2>Vælg komponenter:</h2>
+            <hr class="hr">
+            {% for p in bikeComponents %}
+            <div class="bike-details">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="component-{{ p.id }}" name="selectedComponents" value="{{ p.id }}"
+                                {% if p.id in selected_components %} checked {% endif %}>
+                                <td>Komponent:</td>
+                        <td>{{ p.name }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Beskrivelse:</td>
+                        <td>{{ p.description }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Category:</td>
+                        <td>{{ p.category }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Price:</td>
+                        <td>{{ p.price }}</td>
+                    </tr>
+                </table>
+            </div>
+            <hr class="hr-dashed">
+            {% endfor %}
+        </div>
+    </form>
+</body>
+</html>

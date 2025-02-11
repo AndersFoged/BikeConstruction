@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+<div class="bike-details">
+     <table class="bike-details">
+        <tr>
+            <td>Cykel navn:</td>
+            <td>{{ bike.name }}</td>
+        </tr>
+        <tr>
+            <td style="width: 10%; vertical-align: top; padding: 5px; text-align: right;">
+                <div style="display: flex; align-items: center; justify-content: flex-end;">
+                    <div style="
+                        width: 15px;
+                        height: 15px;
+                        border-radius: 50%;
+                        background-color: {{ bike.typeColor }};
+                        margin-right: 8px;
+                    "></div>
+                    Type:
+                </div>
+            </td>
+            <td>{{ bike_types|get_item:bike.typeId }}</td>
+        </tr>
+        <tr>
+            <td>Beskrivelse:</td>
+            <td>{{ bike.description }}</td>
+        </tr>
+    </table>
+</div>
+<hr class="hr">
+<div class="bike-components">
+    <h3>Komponenter:</h3>
+    <hr>
+    {% for p in bikeWithComponents %}
+        <h5>
+            {{ p.name}}
+            <span class="colon">:</span>
+            {{ p.description}}
+            <span class="colon">:</span>
+            {{ p.category}}
+            <span class="colon">:</span>
+            {{ p.price}}
+        </h5>
+        <hr class="hr-dashed">
+    {% endfor %}
+    <div class = p>
+        <a href="{% url 'bike_update' bike.id %}" class="b" onclick="showDebugLog('--> Rediger cykel')" >Rediger cykel</a>  
+        <h4>Total pris: {{ total_price }}</h4>
+    <div>
+    <hr>    
+    <button onclick="showDialog()" class="b">Slet cykel</button> <a href="/bikes" class="b">Tilbage</a>
+</div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dialog Example</title>
+<script>
+    function showDialog() {
+        let userResponse = confirm("Vil du slette cyklen?");
+        if (userResponse) {
+            window.location.href = "{% url 'delete_bike' bike.id %}";
+        }
+    }
+
+    function showDebugLog(logMessage) {
+          // Send the log to Django
+          fetch("/log_js/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({ message: logMessage})
+        });
+
+    }
+
+</script>
+{% comment %}
+    showDebugLog("--->");
+    showDebugLog(`---> toggleEditMode ${componentId}`);
+    onclick="showDebugLog('--> Rediger cykel')" // html
+    console.log();  // Correct JavaScript logging // ???
+{% comment %}
+{% endcomment %}
+{% endblock %}

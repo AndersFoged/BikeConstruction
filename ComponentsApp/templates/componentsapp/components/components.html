@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="bike-details">
+    <h2>Konfigur komponents</h2>
+
+    <!-- Button to show create form -->
+    <button class="display-mode b" style="display: inline;" toggleId="1" onclick="toggleMode(1)">Opret ny komponent</button>
+    <button class="edit-mode-button b" style="display: none;" toggleId="1" onclick="toggleMode(1)">Fortryd</button>
+
+<!-- Create Component Form -->
+<div id="message-container" style="display: none;" toggleId="1">
+    <h3>Opret ny komponent</h3>
+    <table class="bike-details" style="display: none;" toggleId="1">
+        <tr>
+            <td>Komponent:</td>
+            <td>
+                <input type="text" name="name" placeholder="Enter component name" toggleId="1" style="display: none;" class="edit-mode">
+            </td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>
+                <input type="text" name="description" placeholder="Enter component name" toggleId="1" style="display: none;" class="edit-mode">
+            </td>
+        </tr>
+        <tr>
+            <td>Category:</td>
+            <td>
+                <input type="text" name="category" placeholder="Enter component name" toggleId="1" style="display: none;" class="edit-mode">
+            </td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td>
+                <input type="text" name="price" placeholder="Enter component name" toggleId="1" style="display: none;" class="edit-mode">
+            </td>
+        </tr>
+    </table>
+    <button class="edit-mode-button b" onclick="newComponent(1)">Tilføj komponent</button>
+</div>
+
+    <hr class="hr">
+    {% for p in components %}
+    <div class="bike-details" id="component-{{p.id}}">
+        <table class="bike-details">
+            <tr>
+                <td>Komponent ID:</td>
+                <td>{{ p.id }}</td>
+            </tr>
+            <tr>
+                <td>Komponent:</td>
+                <td>
+                    <span class="display-mode" name="name">{{ p.name }}</span>
+                    <input type="text" name="name" class="edit-mode" value="{{ p.name }}" style="display: none;">
+                </td>
+            </tr>
+            <tr>
+                <td>Beskrivelse:</td>
+                <td>
+                    <span class="display-mode" name="description" class="edit-mode">{{ p.description }}</span>
+                    <input type="text" name="description" class="edit-mode" value="{{ p.description }}" style="display: none;" >
+                </td>
+            </tr>
+            <tr>
+                <td>Kategori:</td>
+                <td>
+                    <span class="display-mode" name="category">{{ p.category }}</span>
+                    <input type="text" name="category" class="edit-mode" value="{{ p.category }}" style="display: none;" >
+                </td>
+            </tr>
+            <tr>
+                <td>Pris:</td>
+                <td>
+                    <span class="display-mode" name="price">{{ p.price }}</span>
+                    <input type="text" name="price" class="edit-mode" value="{{ p.price }}" style="display: none;">
+                </td>
+            </tr>
+        </table>
+        <!-- Display-mode button -->
+        <button class="display-mode b" style="display: inline;" onclick="toggleEditMode({{p.id}})">Rediger {{ p.name }}</button>
+        <!-- Edit-mode button -->
+        <button class="edit-mode-button b" style="display: none;"onclick="saveChanges({{p.id}})">Gem ændringer</button>
+        <button class="edit-mode-button b" style="display: none;"onclick="showDialog({{p.id}})" class="b">Slet komponent</button>
+        <button class="edit-mode-button b" style="display: none;"onclick="cansel({{p.id}})">Fortryd</button>
+        <hr class="hr-dashed">    
+    </div>
+    <hr>
+    {% endfor %}
+    <button id="backToTopBtn" class="btn btn-primary">↑ Back to Top</button>
+
+
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+</div>
+
+<script>
+    function toggleEditMode(componentId) {
+        const component = document.getElementById(`component-${componentId}`);
+        const displayElements = component.querySelectorAll('.display-mode');
+        const editElements = component.querySelectorAll('.edit-mode');
+        const editElementsButton = component.querySelectorAll('.edit-mode-button');
+
+        displayElements.forEach((el) => {
+            el.style.display = el.style.display === 'none' ? '' : 'none';
+        });
+
+        editElements.forEach((el) => {
+            el.style.display = el.style.display === 'none' ? '' : 'none';
+        });
+
+        editElementsButton.forEach((el) => {
+            el.style.display = el.style.display === 'none' ? '' : 'none';
+        });
+    }
+
+
+    function toggleMode(toggleId = 1) {
+        const selector = toggleId ? `[toggleId="${toggleId}"]` : '';
+        const elementsToToggle = document.querySelectorAll(selector);
+
+        elementsToToggle.forEach((element) => {
+            const isHidden = element.style.display === 'none';
+            element.style.display = isHidden ? '' : 'none';
+        });
+    }
+
+    function newComponent(toggleId = 1) {    
+        const selector = toggleId ? `[toggleId="${toggleId}"]` : '';
+        const elementsToToggle = document.querySelectorAll(selector);
+    
+        const inputs = document.querySelectorAll(`input[toggleId="${toggleId}"]`);
+        const data = {};
+        let valid = true; // Start assuming valid
+    
+        // Validate inputs and collect data
+        inputs.forEach(input => {
+            if (input.name) {
+                if (!input.value.trim()) {
+                    valid = false;
+                    input.style.border = '2px solid red'; // Highlight invalid field
+                    input.value = ''; // Clear the invalid input to prompt retyping
+                    input.placeholder = `Please retype ${input.name}`; // Add a prompt
+                } else {
+                    input.style.border = ''; // Remove red border for valid inputs
+                    data[input.name] = input.value;
+                }
+            }
+        });
+    
+        if (!valid) {
+            console.log("This is a log message from JavaScript");
+            alert('Please correct the highlighted fields.');
+            inputs[0]?.focus(); // Focus the first field
+            return; // Exit function until all inputs are valid
+        }
+    
+        showDebugLog(`---> 1 newComponent ${toggleId}`);
+
+        // Send data to Flask
+        fetch('component_create', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert('Component created successfully!');
+                window.location.reload(); // Reload to show the new component
+            } else {
+                alert('Failed to create component.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function saveChanges(componentId) {
+        const component = document.getElementById(`component-${componentId}`);
+        const inputs = component.querySelectorAll('.edit-mode');
+    
+        const data = {};
+        inputs.forEach(input => {
+            if (input.name) data[input.name] = input.value; // Collect all fields like 'name' and 'description'
+        });
+    
+        fetch(`component_update/${componentId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update display-mode elements with the updated data
+                const displayElements = component.querySelectorAll('.display-mode');
+                displayElements.forEach(el => {
+                    const name = el.getAttribute('name'); // Get field name like 'name', 'description'
+                    if (data[name] !== undefined) {
+                        el.textContent = data[name];
+                    }
+                });
+                toggleEditMode(componentId); // Return to display mode
+                location.reload();
+            } else {
+                alert('Failed to save changes: ' + data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function showDialog(componentId) {
+        showDebugLog(`---> toggleEditMode ${componentId}`);
+        let userResponse = confirm("Vil du slette komponent?");
+        showDebugLog(`---> 1 showDialog ${componentId}`);
+        console.log("This is a log message from JavaScript");
+        if (userResponse) {
+            fetch(`component_delete/${componentId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    location.reload();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+
+            location.reload();
+        }
+    }
+
+
+
+    function cansel(componentId) {
+        const component = document.getElementById(`component-${componentId}`);
+        const inputs = component.querySelectorAll('.edit-mode');
+        const displayElements = component.querySelectorAll('.display-mode');
+    
+        // Revert inputs to their corresponding display values
+        inputs.forEach(input => {
+            const name = input.name; // Get the field name like 'name', 'description'
+            const correspondingDisplay = component.querySelector(`.display-mode[name="${name}"]`);
+            if (correspondingDisplay) {
+                input.value = correspondingDisplay.textContent; // Reset input value to display content
+            }
+        });
+    
+        // Switch back to display mode
+        toggleEditMode(componentId);
+    }
+
+    function resizeInput(input) {
+        input.style.width = 'auto';
+        input.style.width = (input.scrollWidth + 2) + 'px';
+    }
+
+   // Get the button
+   const backToTopBtn = document.getElementById('backToTopBtn');
+
+   // Show the button when the user scrolls down 100px
+   window.onscroll = function() {
+       if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+           backToTopBtn.style.display = "block";
+       } else {
+           backToTopBtn.style.display = "none";
+       }
+   };
+
+   // When the user clicks the button, scroll to the top of the document
+   backToTopBtn.addEventListener('click', function() {
+       window.scrollTo({
+           top: 0,
+           behavior: 'smooth' // Smooth scrolling
+       });
+   });
+
+   function showDebugLog(logMessage) {
+    // Send the log to Django
+    fetch("/log_js/", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": "{{ csrf_token }}"
+      },
+      body: JSON.stringify({ message: logMessage})
+  });
+
+}  
+ 
+</script>
+{% comment %}
+    showDebugLog(`---> toggleEditMode ${componentId}`);
+{% endcomment %}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+<div class="bike-details">
+    <h2>Konfigureret cykler</h2>
+    <br>
+    <a href="{% url 'bike_create' %}" class="b">Opret ny cykel</a>
+    <br><br>
+    <hr class="hr">
+        {% for p in bikes %}
+        <div class="bike-details">
+            <table class="bike-details" style="border-collapse: collapse; width: 100%;">
+                <tr>
+                    <td style="width: 10%; vertical-align: top; padding: 5px; text-align: right;">Navn:</td>
+                    <td style="width: 90%; padding: 5px;">{{ p.name}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 10%; vertical-align: top; padding: 5px; text-align: right;">
+                        <div style="display: flex; align-items: center; justify-content: flex-end;">
+                            <div style="
+                                width: 15px;
+                                height: 15px;
+                                border-radius: 50%;
+                                background-color: {{ p.typeColor }};
+                                margin-right: 8px;
+                            "></div>
+                            Type:
+                        </div>
+                    </td>
+                    <td style="width: 90%; padding: 5px;">{{ bike_types|get_item:p.typeId }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 10%; vertical-align: top; padding: 5px; text-align: right;">Beskrivelse:</td>
+                    <td style="width: 90%; padding: 5px;">{{ p.description }}</td>
+                </tr>
+             </table>
+        </div>
+        <a href="{% url 'bike_by_id' p.id %}" class="b">Se cyklen {{ p.name }}</a>
+        <hr class="hr-dashed">
+        {% endfor %}
+        <button id="backToTopBtn" class="btn btn-primary">↑ Back to Top</button>
+
+
+
+    <!-- JavaScript to preserve scroll position -->
+    <script>
+        // Save the scroll position before navigating away
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('scrollPosition_bikes', window.scrollY);
+        });
+
+        // Restore the scroll position on page load
+        window.addEventListener('load', function() {
+            const savedScrollPosition = localStorage.getItem('scrollPosition_bikes');
+            if (savedScrollPosition) {
+                window.scrollTo(0, savedScrollPosition);
+                localStorage.removeItem('scrollPosition_bikes'); // Clear the saved scroll position after restoring it
+            }
+        });
+
+            // Get the button
+    const backToTopBtn = document.getElementById('backToTopBtn');
+
+    // Show the button when the user scrolls down 100px
+    window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            backToTopBtn.style.display = "block";
+        } else {
+            backToTopBtn.style.display = "none";
+        }
+    };
+
+    // When the user clicks the button, scroll to the top of the document
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Smooth scrolling
+        });
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,254 @@
+@import url('https://www.w3schools.com/w3css/4/w3.css');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css');
+
+
+body {
+    background-image: url('BG.svg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+nav {
+    background-color: #f4f4f4;
+    padding: 15px;
+}
+
+.b {
+    font-family: Arial, sans-serif;
+    display: inline-block; /* Required for W3.CSS button styling */
+    border-radius: 5px; /* Smooth rounded corners */
+    color: white; /* Matches 'w3-teal' default text color */
+    background-color: slategray; /* Teal color (#009688 is W3.CSS teal) */
+    text-align: center;
+    padding: 10px 20px; /* Adjusted padding for button-like shape */
+    border: none; /* Reset border for consistency */
+    font-size: 18px;
+    text-decoration: none; /* Ensures no underline */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    margin-right: 5px;
+}
+
+.b:hover {
+    background-color: dimgray; /* Darker teal for hover */
+    color: gainsboro; /* Gold text on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    text-shadow: 1px 1px 2px #000; /* Adds a subtle shadow for effect */
+    text-decoration: none; /* Ensures no underline even on hover */
+}
+
+
+h1 {
+    color: #444;
+}
+hr {
+    margin: 20px 0;
+}
+.w3-spin-slow {
+    animation: w3-spin 3s linear infinite; /* Increase the duration (3s) */
+}
+
+.bike-details h3 {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px; /* Space between the label and the value */
+}
+
+.bike-details h3 span {
+    text-align: left; /* Ensure the text aligns properly */
+    flex: 1; /* Adjust as necessary for consistent alignment */
+}
+
+.bike-details {
+    /*width: 42%; /* Optional: set a width */
+    margin-left: 20px; /* Indent individual elements more if needed */
+    border-collapse: collapse; /* Optional: to remove cell gaps */
+    font-size: 20px; /* All text within this class will inherit this size */
+    /*max-width: 200px; /* Set maximum length in pixels */
+}
+
+.bike-details td:first-child {
+    font-weight: bold; /* Highlight labels */
+    text-align: right; /* Align text to the right for the label column */
+}
+
+.bike-components {
+    margin-left: 40px; /* Adjust this value to indent more */
+    padding-left: 10px; /* Optional: Adds extra spacing inside the div */
+}
+
+/*.bike-components h3,*/
+.bike-components h5,
+.bike-components p {
+    margin-left: 20px; /* Indent individual elements more if needed */
+}
+
+.bike-components .b {
+    margin-top: 10px;
+    display: inline-block; /* Ensures the button/link behaves like a block element */
+}
+
+.bike-components 
+.component-name {
+    font-weight: bold; /* Highlight the name if desired */
+    min-width: 150px; /* Ensure consistent spacing for names */
+    text-align: left;
+}
+
+.bike-components .separator {
+    margin: 0 10px; /* Add space around the colon separator */
+}
+
+.bike-components .component-description {
+    flex: 1; /* Allow the description to take up remaining space */
+    text-align: left; /* Align text to the left */
+}
+
+.colon {
+    font-size: 1.5em;
+    color: #000000;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    margin-left: 1px;  /* Space between the text and colon on the left */
+    margin-right: 5px; /* Space between the colon and the next word */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Creates a responsive grid */
+    gap: 10px; /* Space between items */
+}
+
+.grid-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.textbox-input {
+    height: 100px;
+    width: 800px;
+    color: rgba(140, 110, 93, 0.997);
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    vertical-align: top;
+      }
+
+.centered-text {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.997);
+      }
+
+.hr {
+        border: 1px solid #000000;  /* Line color */
+        width: 100%;              /* Line width */
+        margin:10px auto;       /* Centering and margin */
+      }
+
+.hr-dashed {
+        border: none;
+        border-top: 2px dashed #000000; /* Dashed line */
+        width: 80%;
+        margin: 10px 0;
+        position: relative;
+    }      
+
+.container {
+    display: flex;
+    flex-direction: column; /* Stacks elements vertically */
+    align-items: flex-start; /* Aligns everything to the left */
+    gap: 2px; /* Adds space between elements */
+}
+
+.container div {
+    display: block; /* Ensures block-level behavior */
+    text-align: left; /* Aligns text to the left */
+    width: 100%; /* Optional: Makes elements span the container's width */
+}
+
+.textbox-input {
+    width: 100%; /* Ensures the textarea spans the full width of the parent */
+    text-align: left; /* Aligns text inside the textarea to the left */
+}
+
+.b {
+    text-align: left; /* Aligns text in buttons or links to the left */
+}
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.image-container img {
+    width: 300px;
+    height: auto;
+}
+
+html, body {
+    /*min-width: 1000px; */ /* Minimum width of the page */
+    min-height: 1030px;  /* Minimum height of the page */
+    margin: 0;          /* Remove default margin */
+    padding: 0;         /* Remove default padding */
+  }
+
+.p {
+    white-space: nowrap;
+  }
+
+.edit-mode {
+    display: ''; /* Initially hidden */
+    font-size:14pt;
+    height: 25px;
+    width:1000px
+
+}.edit-mode-button {
+    display: ''; /* Initially hidden */
+}
+
+.display-mode {
+    display: inline; /* Default display for spans */
+}
+
+input[style*="border: 2px solid red"] {
+    background-color: #ffe6e6; /* Light red background for visibility */
+}
+
+#backToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* Hidden by default */
+    z-index: 1000;
+    font-size: 18px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50%;
+    background-color: slategray;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#backToTopBtn:hover {
+    background-color: dimgray; /* Darker teal for hover */
+    color: gainsboro; /* Gold text on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    text-shadow: 1px 1px 2px #000; /* Adds a subtle shadow for effect */
+    text-decoration: none; /* Ensures no underline even on hover */
+}
+
+.b_color {
+    color: lightblue; 
+    color: #4bc1e9;
+    color: #006b96;
+    color: #4bc1e9;
+   
+    color: lightgray; 
+    color: gray;
+    color: darkslategray;
+    color: gray;
+    color: slategray;
+}
